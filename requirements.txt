@@ -1,0 +1,8 @@
+# To run the Tetris game, you need to set up a virtual environment and install the following dependency:
+
+pygame==2.5.0
+
+# Make sure to create a virtual environment before installing the dependencies:
+# python -m venv venv
+# source venv/bin/activate (on Linux/Mac) or venv\Scripts\activate (on Windows)
+# pip install -r requirements.txt
