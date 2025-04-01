@@ -1,2 +1,4 @@
 import game.core.config
-print(game.core.config)
+import game.core.grid
+import game.core.pieces
+print(game.core.pieces)

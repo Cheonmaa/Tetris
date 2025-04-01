@@ -1,3 +1,5 @@
+from game.core.pieces import *
+
 class Grid:
     def __init__(self, rows, cols, block_size):
         self.rows = rows
