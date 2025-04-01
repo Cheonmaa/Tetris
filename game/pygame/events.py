@@ -1,31 +1,26 @@
-from game.core.pieces import *
 import pygame
 import os
-
-#Disable os sound -> Problem with WSL
-os.environ["SDL_AUDIODRIVER"] = "dummy"
+from game.core.pieces import *
 
 class Events:
-    def __init__(self, display):
-        self.run(display)
+    def __init__(self):
+        self.running = True
 
-    def rotate_key(self, display):
-        color = (255,12,15)
+    def handle_events(self, piece, grid):
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-                display.fill(color)
-                pygame.display.flip()
-                print("Touche R pressée !")
-
-    def run(self, display):
-        running = True
-        while running:
-            self.rotate_key(display)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-        
-        pygame.quit()
-
-if __name__ == "__main__":
-    Events()
+            if event.type == pygame.QUIT:
+                self.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    piece.rotate()
+                    if not grid.is_valid_position(piece):
+                        piece.rotate()  # Annuler si non valide
+                elif event.key == pygame.K_LEFT:
+                    piece.move_left(grid)
+                elif event.key == pygame.K_RIGHT:
+                    piece.move_right(grid)
+                elif event.key == pygame.K_DOWN:
+                    piece.move_down(grid)
+    
+    def is_running(self):
+        return self.running
